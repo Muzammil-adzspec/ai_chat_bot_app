@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1094481299071",
+    "project_id": "ai-chat-bot-app-eba04",
+    "storage_bucket": "ai-chat-bot-app-eba04.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094481299071:android:7cffce30cc5e42d0d4a14a",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjwhUd4_9ElNWc_DLP6EH7IyoSe-3coSw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
