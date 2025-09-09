@@ -1,27 +1,104 @@
 import 'package:ai_chat_bot_app/utils/enums/assistant_type.dart';
+import 'package:ai_chat_bot_app/utils/generated_assets/assets.dart';
 
 class AssistantModel {
   final String name;
+  final String description;
   final AssistantType type;
   final String iconPath;
 
-  AssistantModel({required this.name, required this.type, required this.iconPath});
+  AssistantModel({required this.name, required this.description, required this.type, required this.iconPath});
 }
 
 List<AssistantModel> assistants = [
-  AssistantModel(name: 'Generic', type: AssistantType.generic, iconPath: ''),
-  AssistantModel(name: 'Doctor', type: AssistantType.doctor, iconPath: ''),
-  AssistantModel(name: 'Accountant', type: AssistantType.accountant, iconPath: ''),
-  AssistantModel(name: 'Writer', type: AssistantType.writer, iconPath: ''),
-  AssistantModel(name: 'Wife', type: AssistantType.wife, iconPath: ''),
-  AssistantModel(name: 'Husband', type: AssistantType.husband, iconPath: ''),
-  AssistantModel(name: 'Relationship Doctor', type: AssistantType.relationshipDoctor, iconPath: ''),
-  AssistantModel(name: 'Personal Trainer', type: AssistantType.personalTrainer, iconPath: ''),
-  AssistantModel(name: 'Dietitian', type: AssistantType.dietitian, iconPath: ''),
-  AssistantModel(name: 'Astrology', type: AssistantType.astrology, iconPath: ''),
-  AssistantModel(name: 'Fashion Designer', type: AssistantType.fashionDesigner, iconPath: ''),
-  AssistantModel(name: 'Chef', type: AssistantType.chef, iconPath: ''),
-  AssistantModel(name: 'Image Generation', type: AssistantType.imageGeneration, iconPath: ''),
-  AssistantModel(name: 'Influencer', type: AssistantType.influencer, iconPath: ''),
-  AssistantModel(name: 'Math Teacher', type: AssistantType.mathTeacher, iconPath: ''),
+  AssistantModel(
+    name: 'Generic',
+    description: 'Lorem ipsum is a dummy or placeholder text commonly',
+    type: AssistantType.generic,
+    iconPath: Assets.gifLogoSpin,
+  ),
+  AssistantModel(
+    name: 'Doctor',
+    description: 'Lorem ipsum is a dummy or placeholder text commonly',
+    type: AssistantType.doctor,
+    iconPath: Assets.gifLogoSpin,
+  ),
+  AssistantModel(
+    name: 'Accountant',
+    description: 'Lorem ipsum is a dummy or placeholder text commonly',
+    type: AssistantType.accountant,
+    iconPath: Assets.gifLogoSpin,
+  ),
+  AssistantModel(
+    name: 'Writer',
+    description: 'Lorem ipsum is a dummy or placeholder text commonly',
+    type: AssistantType.writer,
+    iconPath: Assets.gifLogoSpin,
+  ),
+  AssistantModel(
+    name: 'Wife',
+    description: 'Lorem ipsum is a dummy or placeholder text commonly',
+    type: AssistantType.wife,
+    iconPath: Assets.gifLogoSpin,
+  ),
+  AssistantModel(
+    name: 'Husband',
+    description: 'Lorem ipsum is a dummy or placeholder text commonly',
+    type: AssistantType.husband,
+    iconPath: Assets.gifLogoSpin,
+  ),
+  AssistantModel(
+    name: 'Relationship Doctor',
+    description: 'Lorem ipsum is a dummy or placeholder text commonly',
+    type: AssistantType.relationshipDoctor,
+    iconPath: Assets.gifLogoSpin,
+  ),
+  AssistantModel(
+    name: 'Personal Trainer',
+    description: 'Lorem ipsum is a dummy or placeholder text commonly',
+    type: AssistantType.personalTrainer,
+    iconPath: Assets.gifLogoSpin,
+  ),
+  AssistantModel(
+    name: 'Dietitian',
+    description: 'Lorem ipsum is a dummy or placeholder text commonly',
+    type: AssistantType.dietitian,
+    iconPath: Assets.gifLogoSpin,
+  ),
+  AssistantModel(
+    name: 'Astrology',
+    description: 'Lorem ipsum is a dummy or placeholder text commonly',
+    type: AssistantType.astrology,
+    iconPath: Assets.gifLogoSpin,
+  ),
+  AssistantModel(
+    name: 'Fashion Designer',
+    description: 'Lorem ipsum is a dummy or placeholder text commonly',
+    type: AssistantType.fashionDesigner,
+    iconPath: Assets.gifLogoSpin,
+  ),
+  AssistantModel(
+    name: 'Chef',
+    description: 'Lorem ipsum is a dummy or placeholder text commonly',
+    type: AssistantType.chef,
+    iconPath: Assets.gifLogoSpin,
+  ),
+  AssistantModel(
+    name: 'Image Generation',
+    description: 'Lorem ipsum is a dummy or placeholder text commonly',
+    type: AssistantType.imageGeneration,
+    iconPath: Assets.gifLogoSpin,
+  ),
+  AssistantModel(
+    name: 'Influencer',
+    description: 'Lorem ipsum is a dummy or placeholder text commonly',
+    type: AssistantType.influencer,
+    iconPath: Assets.gifLogoSpin,
+  ),
+  AssistantModel(
+    name: 'Math Teacher',
+    description: 'Lorem ipsum is a dummy or placeholder text commonly',
+    type: AssistantType.mathTeacher,
+    iconPath: Assets.gifLogoSpin,
+  ),
 ];

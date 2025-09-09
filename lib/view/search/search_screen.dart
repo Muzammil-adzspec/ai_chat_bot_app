@@ -7,9 +7,9 @@ import 'package:ai_chat_bot_app/utils/globals/global_widgets/custom_scaffold.dar
 import 'package:ai_chat_bot_app/utils/globals/global_widgets/ai_logo_with_glow_bg.dart';
 import 'package:ai_chat_bot_app/utils/generated_assets/assets.dart';
 import 'package:get/get.dart';
-import '../../controller/message_controller.dart';
-import '../../utils/enums/assistant_type.dart';
-import '../../utils/globals/global_widgets/glow_pill_button.dart';
+import 'package:ai_chat_bot_app/controller/message_controller.dart';
+import 'package:ai_chat_bot_app/utils/enums/assistant_type.dart';
+import 'package:ai_chat_bot_app/utils/globals/global_widgets/glow_pill_button.dart';
 
 class SearchScreen extends StatefulWidget {
   final AssistantType assistantType;
@@ -239,7 +239,7 @@ class _SearchScreenState extends State<SearchScreen> {
               duration: const Duration(milliseconds: 200),
               curve: Curves.easeOut,
               padding: EdgeInsets.only(bottom: 10, left: 0, right: 0, top: 0),
-              child: MessageBar(),
+              child: MessageBar(assistantType: widget.assistantType),
             ),
           ),
         ],
@@ -327,8 +327,9 @@ class MessageBar extends StatefulWidget {
   final void Function(String value)? onSubmitted;
   final void Function(String value)? onChanged;
   final VoidCallback? onMic;
+  final AssistantType assistantType; // default
 
-  const MessageBar({super.key, this.onSubmitted, this.onChanged, this.onMic});
+  const MessageBar({super.key, this.onSubmitted, this.onChanged, this.onMic, required this.assistantType});
 
   @override
   State<MessageBar> createState() => _MessageBarState();
@@ -416,7 +417,7 @@ class _MessageBarState extends State<MessageBar> {
                           key: const ValueKey('send'),
                           padding: EdgeInsets.zero,
                           onPressed: () {
-                            _messageController.send(text: _controller.text, who: AssistantType.doctor);
+                            _messageController.send(text: _controller.text, who: widget.assistantType);
                             _controller.clear();
                             _focus.unfocus();
                           },
