@@ -18,4 +18,15 @@ class StringConstants {
   static const String entitlementId = "pro";
   static const String appleApiKey = "appl_OcywAiKlmBQnrWbDvPZjvJyctiV";
   static const String googleApiKey = "goog_QeWppGOlRCUpsvxhFeBshpIcuRn";
+
+  // gemini related strings
+  static const geminiApiKey = "AIzaSyAZcog-faubdNknouN-C5BPLed439t2jog";
+
+  // Models
+  static const model = 'gemini-2.0-flash';
+
+  // Base URLs
+  static const base = 'https://generativelanguage.googleapis.com/v1beta';
+  static String genUrl() => '$base/models/$model:generateContent?key=$geminiApiKey';
+  static String sseUrl() => '$base/models/$model:streamGenerateContent?alt=sse&key=$geminiApiKey';
 }

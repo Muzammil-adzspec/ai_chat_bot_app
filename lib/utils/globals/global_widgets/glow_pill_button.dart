@@ -4,10 +4,11 @@ import 'package:ai_chat_bot_app/utils/constants/color_constants.dart';
 
 class GlowPillButton extends StatelessWidget {
   final Widget child;
-  final Function()? onTap;
+  final VoidCallback? onTap;
   final EdgeInsetsGeometry? padding;
   final double radius;
   final double borderWidth;
+  final double? width;
   final Color? fillColor;
   final Color? borderColor;
   final bool showGlow;
@@ -22,6 +23,7 @@ class GlowPillButton extends StatelessWidget {
     this.fillColor,
     this.borderColor,
     this.showGlow = false,
+    this.width,
   });
 
   @override
@@ -32,9 +34,10 @@ class GlowPillButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Center(
-        child: DecoratedBox(
+        child: Container(
+          width: width,
           decoration: BoxDecoration(
-            color: bgBase.withAlpha(56), // ~0.22
+            color: bgBase.withAlpha(180), // ~0.22
             borderRadius: BorderRadius.circular(radius),
             border: Border.all(color: c.withAlpha(217), width: borderWidth), // ~0.85
             boxShadow: showGlow
@@ -54,7 +57,9 @@ class GlowPillButton extends StatelessWidget {
               color: Colors.transparent,
               child: Padding(
                 padding: padding ?? const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-                child: DefaultTextStyle.merge(style: context.displaySmall, child: child),
+                child: Center(
+                  child: DefaultTextStyle.merge(style: context.displaySmall, child: child),
+                ),
               ),
             ),
           ),

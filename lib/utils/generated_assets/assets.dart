@@ -7,12 +7,16 @@ class Assets {
   static const String fontsRobotoLight = 'assets/fonts/Roboto-Light.ttf';
   static const String fontsRobotoMedium = 'assets/fonts/Roboto-Medium.ttf';
   static const String fontsRobotoRegular = 'assets/fonts/Roboto-Regular.ttf';
+  static const String gifLogoSpin = 'assets/gif/logo_spin.gif';
   static const String iconsChatGpt = 'assets/icons/chat_gpt.png';
   static const String iconsDeepSeek = 'assets/icons/deep_seek.png';
+  static const String iconsEdit = 'assets/icons/edit.png';
+  static const String iconsEmptyInbox = 'assets/icons/empty_inbox.png';
   static const String iconsGemini = 'assets/icons/gemini.png';
   static const String iconsHome = 'assets/icons/home.png';
   static const String iconsInbox = 'assets/icons/inbox.png';
   static const String iconsLogo = 'assets/icons/logo.png';
+  static const String iconsShare = 'assets/icons/share.png';
   static const String imagesOnBoarding1 = 'assets/images/on_boarding_1.png';
   static const String imagesOnBoarding2 = 'assets/images/on_boarding_2.png';
   static const String imagesOnBoarding3 = 'assets/images/on_boarding_3.png';

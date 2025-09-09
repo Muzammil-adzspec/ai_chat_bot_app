@@ -1,3 +1,4 @@
+import 'package:ai_chat_bot_app/utils/extension/navigation_extension.dart';
 import 'package:ai_chat_bot_app/utils/extension/size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,9 +7,12 @@ import 'package:ai_chat_bot_app/utils/theme/text_theme.dart';
 import 'package:ai_chat_bot_app/utils/globals/global_widgets/custom_scaffold.dart';
 import '../../controller/bottom_nav_controller.dart';
 import '../../controller/home_controller.dart';
+import '../../utils/enums/assistant_type.dart';
 import '../../utils/generated_assets/assets.dart';
+import '../../utils/globals/global_functions.dart';
 import '../../utils/globals/global_widgets/ai_logo_with_glow_bg.dart';
 import '../../utils/globals/global_widgets/premium_plan_banner.dart';
+import '../search/search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -45,19 +49,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       AiLogoWithGlowBg(),
                       10.h,
                       // ===== search tap area (non-editable) =====
-                      _SearchTap(onTap: () {}),
-
-                      const SizedBox(height: 16),
+                      _SearchTap(
+                        onTap: () {
+                          context.push(SearchScreen(assistantType: AssistantType.generic));
+                        },
+                      ),
+                      16.h,
                       Text('My Bots', style: context.labelSmall),
-
-                      const SizedBox(height: 12),
+                      12.h,
                       _BotsGrid(controllerTag: homeC),
-
-                      const SizedBox(height: 8),
+                      8.h,
                       // ===== premium card placeholder =====
                       PremiumPlanBannerPage(),
-
-                      const SizedBox(height: 90), // space for bottom bar notch
+                      90.h, // space for bottom bar notch
                     ],
                   ),
                 ),
@@ -67,16 +71,10 @@ class _HomeScreenState extends State<HomeScreen> {
           Positioned(
             top: 12,
             right: 12,
-            child: _IconCircleButton(
-              icon: Icons.settings,
-              onTap: () {
-                print("abc");
-              },
-            ),
+            child: _IconCircleButton(icon: Icons.settings, onTap: () {}),
           ),
-
           // Credits pill (top-left)
-          Positioned(top: 12, left: 12, child: _CreditsPill(count: 3, onTap: () {})),
+          // Positioned(top: 12, left: 12, child: _CreditsPill(count: 3, onTap: () {})),
         ],
       ),
     );
@@ -233,7 +231,7 @@ class _CreditsPill extends StatelessWidget {
         child: Row(
           children: [
             const Icon(Icons.auto_awesome_sharp, size: 20, color: Colors.white),
-            const SizedBox(width: 6),
+            6.w,
             Text('$count', style: context.displaySmall),
           ],
         ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../constants/color_constants.dart';
-import '../../generated_assets/assets.dart';
+import 'package:ai_chat_bot_app/utils/constants/color_constants.dart';
+import 'package:ai_chat_bot_app/utils/generated_assets/assets.dart';
 
 class AiLogoWithGlowBg extends StatelessWidget {
   const AiLogoWithGlowBg({super.key});
@@ -31,9 +31,8 @@ class AiLogoWithGlowBg extends StatelessWidget {
               ),
             ),
           ),
-
           // Logo
-          SizedBox(height: 120, width: 120, child: Image.asset(Assets.iconsLogo)),
+          SizedBox(height: 200, width: 200, child: Image.asset(Assets.gifLogoSpin)),
         ],
       ),
     );

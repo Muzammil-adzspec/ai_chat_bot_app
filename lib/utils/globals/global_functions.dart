@@ -1,13 +1,17 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../constants/color_constants.dart';
+import '../constants/string_constants.dart';
+import '../enums/assistant_type.dart';
 
 class GlobalFunctions {
   static void genericUnFocus() {
@@ -91,4 +95,101 @@ class GlobalFunctions {
       dismissDirection: DismissDirection.horizontal,
     );
   }
+}
+
+class GeminiHttpClient {
+  final http.Client _client;
+  GeminiHttpClient([http.Client? c]) : _client = c ?? http.Client();
+
+  // ---- Build request body for a given assistant ----
+  Map<String, dynamic> _body(String userText, AssistantType type) {
+    return {
+      "systemInstruction": {
+        "role": "system",
+        "parts": [
+          {"text": assistantSystem(type)},
+        ],
+      },
+      "generationConfig": {"temperature": 0.6, "maxOutputTokens": 1024},
+      // If you want safetySettings, add here
+      "contents": [
+        {
+          "role": "user",
+          "parts": [
+            {"text": userText},
+          ],
+        },
+      ],
+    };
+  }
+
+  /// --------- NON-STREAM ----------
+  Future<String> generate(String userText, AssistantType type) async {
+    final uri = Uri.parse(StringConstants.genUrl());
+    final res = await _client.post(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(_body(userText, type)),
+    );
+
+    if (res.statusCode >= 200 && res.statusCode < 300) {
+      final json = jsonDecode(res.body) as Map<String, dynamic>;
+      // gemini v1beta returns candidates[0].content.parts[].text
+      final candidates = (json['candidates'] as List?) ?? [];
+      if (candidates.isEmpty) return '';
+      final parts = (((candidates.first as Map)['content'] as Map)['parts'] as List?) ?? [];
+      final buf = StringBuffer();
+      for (final p in parts) {
+        final t = (p as Map)['text'] as String?;
+        if (t != null) buf.write(t);
+      }
+      return buf.toString();
+    } else {
+      throw Exception('Gemini error ${res.statusCode}: ${res.body}');
+    }
+  }
+
+  /// --------- STREAM (SSE) ----------
+  /// Progressive text: yields the concatenated text so far.
+  Stream<String> generateStream(String userText, AssistantType type) async* {
+    final req = http.Request('POST', Uri.parse(StringConstants.sseUrl()))
+      ..headers['Content-Type'] = 'application/json'
+      ..body = jsonEncode(_body(userText, type));
+
+    final streamed = await _client.send(req);
+    if (streamed.statusCode < 200 || streamed.statusCode >= 300) {
+      final body = await streamed.stream.bytesToString();
+      throw Exception('Gemini SSE error ${streamed.statusCode}: $body');
+    }
+
+    final buffer = StringBuffer();
+
+    // SSE comes as "data: {json}\n\n"
+    await for (final chunk in streamed.stream.transform(utf8.decoder)) {
+      for (final line in const LineSplitter().convert(chunk)) {
+        if (!line.startsWith('data:')) continue;
+        final payload = line.substring(5).trim(); // after 'data:'
+        if (payload.isEmpty || payload == '[DONE]') continue;
+
+        try {
+          final json = jsonDecode(payload) as Map<String, dynamic>;
+          final cands = (json['candidates'] as List?) ?? [];
+          if (cands.isEmpty) continue;
+          final parts = (((cands.first as Map)['content'] as Map)['parts'] as List?) ?? [];
+          // Each SSE event can include partial text in parts[].text
+          for (final p in parts) {
+            final t = (p as Map)['text'] as String?;
+            if (t != null && t.isNotEmpty) {
+              buffer.write(t);
+              yield buffer.toString();
+            }
+          }
+        } catch (_) {
+          // ignore malformed event lines
+        }
+      }
+    }
+  }
+
+  void dispose() => _client.close();
 }

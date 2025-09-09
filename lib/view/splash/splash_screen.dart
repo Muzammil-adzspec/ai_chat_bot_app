@@ -68,7 +68,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
 
             // Logo
-            SizedBox(height: 120, width: 120, child: Image.asset(Assets.iconsLogo)),
+            SizedBox(height: 200, width: 200, child: Image.asset(Assets.gifLogoSpin)),
           ],
         ),
       ),

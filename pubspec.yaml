@@ -16,6 +16,7 @@ dependencies:
   firebase_core: ^4.1.0
   firebase_analytics: ^12.0.1
   image_picker: ^1.2.0
+  http: ^1.5.0
 
 dev_dependencies:
   flutter_test:
@@ -27,6 +28,7 @@ flutter:
    - assets/fonts/
    - assets/images/
    - assets/icons/
+   - assets/gif/
 
   fonts:
     - family: Roboto

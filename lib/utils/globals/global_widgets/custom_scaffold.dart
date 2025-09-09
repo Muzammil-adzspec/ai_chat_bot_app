@@ -32,7 +32,7 @@ class CustomScaffold extends StatelessWidget {
           backgroundColor: Colors.transparent,
           floatingActionButton: floatingActionButton,
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-          resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: true,
         ),
       ),
     );
